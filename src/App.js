@@ -14,21 +14,20 @@ class App extends React.Component {
         }
       }
     }
-    //console.log(imgData);
 
     //Draw the indicated canvas
     var can = document.getElementById("canvas");
     var ctx = can.getContext("2d");
-    var k = 0;
-    console.log(imgData.length);
-    while (k < imgData.length) {
-      for (var i = 0; i < 256; i++) {
-        for (var j = 0; j < 128; j++) {
-          ctx.fillStyle = "rgb(" + imgData[k] + ")";
-          //console.log(ctx.fillStyle);
-          ctx.fillRect(i, j, 1, 1);
-          k += 1;
-        }
+
+    for (var k = 0, x = 0, y = 0; k < imgData.length, y < 128; k++) {
+      ctx.fillStyle = "rgb(" + imgData[k] + ")";
+      //console.log(ctx.fillStyle);
+      ctx.fillRect(x, y, 1, 1);
+
+      x++;
+      if (k != 0 && k % 256 === 0) {
+        x = 0;
+        y++;
       }
     }
   }
