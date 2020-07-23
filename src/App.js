@@ -2,14 +2,8 @@ import React from "react";
 import "./App.css";
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      img: new Image(),
-    };
-  }
-
   componentDidMount() {
+    //Generate all the require values
     var imgData = [];
     for (var i = 8; i <= 256; i = i + 8) {
       for (var j = 8; j <= 256; j = j + 8) {
@@ -22,33 +16,7 @@ class App extends React.Component {
     }
     //console.log(imgData);
 
-    // var imgData = [
-    //     [0, 0, 0],
-    //     [128, 8, 16],
-    //     [256, 8, 24],
-    //     [8, 8, 32],
-    //     [128, 8, 40],
-    //     [256, 8, 48],
-    //     [8, 8, 56],
-    //     [256, 8, 64],
-    //   ],
-    //   img = document.createElement("div"),
-    //   i = 0,
-    //   l = imgData.length;
-    // var pixel;
-    // img.style.cssText = " width:256px; height:128px";
-    // while (i < l) {
-    //   pixel = document.createElement("div");
-    //   pixel.style.cssText =
-    //     "float:left; width:10px; height:10px; background-color: rgb(" +
-    //     imgData[i].toString() +
-    //     ")";
-    //   //console.log(imgData[i]);
-    //   img.appendChild(pixel);
-    //   i += 1;
-    // }
-    // document.body.appendChild(img);
-
+    //Draw the indicated canvas
     var can = document.getElementById("canvas");
     var ctx = can.getContext("2d");
     var k = 0;
@@ -63,16 +31,9 @@ class App extends React.Component {
         }
       }
     }
-
-    // var imgPath = ctx.toDataURL("image/png");
-
-    // var image = new Image();
-    // image.src = can.toDataURL("image/png");
-    // document.body.appendChild(image);
-    // // this.setState({ img: image });
-    // // console.log(this.state.img);
   }
 
+  //convert canvas to image and download the image
   handleDownloadImage = (e) => {
     e.preventDefault();
     var link = document.createElement("a");
