@@ -22,12 +22,3 @@ button {
   line-height: 40px;
   border-color: white;
 }
-
-.button-layout {
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.image-layout {
-  padding: 10px;
-}
