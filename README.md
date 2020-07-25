@@ -1,4 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Render Outcome
+![](image/Screenshot.png)
+
+## Components
+Title: Download Image
+
+Image: <br />
+Generate image data<br />
+Generate cavas accordingly<br />
+
+Download Buttom:<br />
+Generate image accordingly<br />
+Click button download image <br />
+
+Test：<br />
+renders Title correctly<br />
+renders Download button correctly<br />
+renders Canvas correctly<br />
+Generate Image Values correctly<br />
+
+### Test Outcome
+![](image/Test.png)
+
+## Technical Stack
+React  [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
