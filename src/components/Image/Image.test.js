@@ -20,11 +20,4 @@ describe("Image test", () => {
     const data = img.generateValues();
     expect(data.length).toBe(32768);
   });
-
-  test("should check `componentDidMount()`", () => {
-    const spy = jest.spyOn(Image.prototype, "componentDidMount");
-    const wrapper = mount(<Image />);
-    wrapper.instance().componentDidMount();
-    expect(spy).toHaveBeenCalled();
-  });
 });

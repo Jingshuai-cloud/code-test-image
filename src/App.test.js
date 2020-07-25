@@ -19,6 +19,5 @@ describe("App test", () => {
   test("renders Title correctly", () => {
     const { getByText } = renderResult;
     expect(getByText(/Download Image/)).toBeInTheDocument();
-    screen.debug();
   });
 });
