@@ -1,51 +1,75 @@
 import React from "react";
 import "./Image.css";
-
+import ReactDOM from "react-dom";
 class Image extends React.Component {
   constructor(props) {
     super(props);
+    this.canvasRef = React.createRef();
   }
+  //decide the step for rgb colour
+  breakStepR = 32;
+  breakStepG = 32;
+  breakStepB = 32;
 
-  //Initialize the image dataset
-  imgData = [];
+  //decide the colour rgb range
+  colourRangeR = 256;
+  colourRangeG = 256;
+  colourRangeB = 256;
 
+  //caculate the rgb colour step
+  colorStepR = this.colourRangeR / this.breakStepR;
+  colorStepG = this.colourRangeG / this.breakStepG;
+  colorStepB = this.colourRangeB / this.breakStepB;
+
+  //decide the generated image size/px
+  imageWidth = 256;
+  imageHeight = 128;
+
+  //Generate image dataset
   generateValues = () => {
-    const {
-      colorRangeR,
-      colorStepR,
-      colorRangeG,
-      colorStepG,
-      colorRangeB,
-      colorStepB,
-    } = this.props;
+    let imgData = [];
 
-    for (let r = colorStepR; r <= colorRangeR; r = r + colorStepR) {
-      for (let g = colorStepG; g <= colorRangeG; g = g + colorStepG) {
-        for (let b = colorStepB; b <= colorRangeB; b = b + colorStepB) {
+    for (
+      let r = this.colorStepR;
+      r <= this.colourRangeR;
+      r = r + this.colorStepR
+    ) {
+      for (
+        let g = this.colorStepG;
+        g <= this.colourRangeG;
+        g = g + this.colorStepG
+      ) {
+        for (
+          let b = this.colorStepB;
+          b <= this.colourRangeB;
+          b = b + this.colorStepB
+        ) {
           let colour = [r, g, b];
-          //add every data to array
-          this.imgData.push(colour);
+
+          imgData.push(colour);
         }
       }
     }
+    //console.log(imgData);
+    return imgData;
   };
 
-  generateCanvas = () => {
-    const { canvasId, width, height } = this.props;
-    const can = document.getElementById(canvasId);
+  //Generate canvas according to dataset
+  generateCanvas = (imgData) => {
+    const can = this.canvasRef.current;
     const ctx = can.getContext("2d");
 
     //Generate every colour for 1*1 px
     for (
       let index = 0, x = 0, y = 0;
-      index < this.imgData.length, y < height;
+      index < imgData.length, y < this.imageHeight;
       index++
     ) {
-      ctx.fillStyle = "rgb(" + this.imgData[index] + ")";
+      ctx.fillStyle = "rgb(" + imgData[index] + ")";
       ctx.fillRect(x, y, 1, 1);
 
       x++;
-      if (index != 0 && index % width === 0) {
+      if (index !== 0 && index % this.imageWidth === 0) {
         x = 0;
         y++;
       }
@@ -53,15 +77,21 @@ class Image extends React.Component {
   };
 
   componentDidMount() {
-    this.generateValues();
-    this.generateCanvas();
+    this.generateCanvas(this.generateValues());
   }
 
   render() {
-    const { canvasId, width, height } = this.props;
+    const { canvasId } = this.props;
     return (
       <div className="image-layout">
-        <canvas id={canvasId} width={width} height={height}></canvas>
+        <canvas
+          ref={this.canvasRef}
+          id={canvasId}
+          width={this.imageWidth}
+          height={this.imageHeight}
+        >
+          This is a canvas image
+        </canvas>
       </div>
     );
   }

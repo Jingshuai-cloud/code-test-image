@@ -2,18 +2,19 @@ import React from "react";
 import "./Download.css";
 
 function Download(props) {
-  let imageHref = "";
-
   //Generate Image accordingly
   const generateImage = () => {
-    imageHref = document.getElementById(props.canvasId).toDataURL("image/png");
+    const imageHref = document
+      .getElementById(props.canvasId)
+      .toDataURL("image/png");
+    return imageHref;
   };
 
   //Dolownload image
   const downloadImage = () => {
     const link = document.createElement("a");
     link.download = "Image.png";
-    link.href = imageHref;
+    link.href = generateImage();
     link.click();
   };
 
